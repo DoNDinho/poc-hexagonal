@@ -1,0 +1,20 @@
+deployType: eks
+ecsData:
+eksData:
+  image: "poc-hexagonal"
+  image_version: "1.0.0"
+  app_version: "1.0.0"
+  env:
+    development:
+      account: ""
+      cluster_name: ""
+      cluster_region: ""
+    quality:
+      account: ""
+      cluster_name: ""
+      cluster_region: ""
+    production:
+      account: ""
+      cluster_name: ""
+      cluster_region: ""
+
