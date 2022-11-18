@@ -1,0 +1,24 @@
+{
+  "files.exclude": {
+    "**/.git": false,
+    "**/node_modules": true,
+    "**/redis": true,
+    "**/dist": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/.husky": true,
+    "**/coverage": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/.husky": true,
+    "**/.DS_Store": true
+  },
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true
+}

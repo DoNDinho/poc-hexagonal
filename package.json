@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon -r dotenv/config --exec ts-node src/index.ts"
+    "start:dev": "nodemon -r dotenv/config --exec ts-node src/index.ts",
+    "build": "tsc --build"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,40 @@
+version: '3.9'
+services:
+  redis:
+    container_name: redis
+    image: redis:latest
+    restart: always
+    ports:
+      - 6380:6379
+    networks:
+      - poc-hexagonal-network
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    command: ["redis-server", "--bind", "redis", "--port", "6380"]
+    volumes:
+    - ./redis/data:/data
+    - /etc/timezone:/etc/timezone:ro
+    - /etc/localtime:/etc/localtime:ro
+  node:
+    container_name: poc-hexagonal
+    image: poc-hexagonal:1.0.0
+    build:
+      context: .
+      dockerfile: ./ci/docker/Dockerfile
+      target: development
+    ports:
+      - "3000:3000"
+    networks:
+      - poc-hexagonal-network
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6380
+    volumes:
+      - "./:/usr/src/app"
+      - "/usr/src/app/node_modules"
+    command: npm run start:dev
+    depends_on:
+      - redis
+networks:
+  poc-hexagonal-network:
+    driver: bridge

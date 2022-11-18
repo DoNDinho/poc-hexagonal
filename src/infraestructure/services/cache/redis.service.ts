@@ -1,26 +1,36 @@
-import { CacheService } from '../../../domain/services/cache/cache.service'
-import { RedisClient } from './redis-client.service'
+import { CacheService } from "../../../domain/services/cache/cache.service";
+import { RedisClient } from "./redis-client.service";
 
 export class RedisCacheService implements CacheService {
-  private client
+  private client;
 
   constructor(client: RedisClient) {
-    this.client = client.getClient()
+    this.client = client.getClient();
   }
 
   async get<T>(key: string): Promise<T> {
     try {
-      const data = await this.client.get(key)
-      if (data) return JSON.parse(data)
-      return null
+      const data = await this.client.get(key);
+      if (data) return JSON.parse(data);
+      return null;
     } catch (error) {
-      return null
+      return null;
     }
   }
 
   async set(key: string, value: string, options?: any): Promise<void> {
     try {
-      await this.client.set(key, value, options)
-    } catch (error) {}
+      await this.client.set(key, value, options);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async expire(key: string, seconds: number): Promise<void> {
+    try {
+      await this.client.expire(key, seconds);
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

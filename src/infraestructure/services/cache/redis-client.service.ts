@@ -1,17 +1,18 @@
-import { createClient, RedisClientOptions } from 'redis'
+import { createClient, RedisClientOptions } from "redis";
 
 export class RedisClient {
-  private client
+  private client;
 
   constructor(options: RedisClientOptions) {
-    this.client = createClient(options)
+    this.client = createClient(options);
   }
 
   async connect(): Promise<void> {
-    await this.client.connect()
+    await this.client.connect();
+    await this.client.flushDb(); //Delete all keys
   }
 
   getClient() {
-    return this.client
+    return this.client;
   }
 }
