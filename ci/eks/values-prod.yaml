@@ -76,6 +76,10 @@ service:
 ingress:
   ingressClassName: ingress-internal
   enabled: true
+  annotations:
+    alb.ingress.kubernetes.io/target-type: 'ip'
+    alb.ingress.kubernetes.io/scheme: internal
+    alb.ingress.kubernetes.io/group.name: alb-prod-bcl-priv
   rules:
     host: pochexagonal-bcl-ms-prod.itauchile.cl
     path: "/"

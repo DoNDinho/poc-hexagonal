@@ -54,7 +54,7 @@ vars:
 
 secrets:
    
-livenessEnabler: true
+livenessEnabler: false
 livenessProbe:
   httpGet:
     path: /health
@@ -62,7 +62,7 @@ livenessProbe:
   initialDelaySeconds: 5
   periodSeconds: 10
 
-readinessEnabler: true
+readinessEnabler: false
 readinessProbe:
   httpGet:
     path: /health
@@ -79,8 +79,9 @@ ingress:
   enabled: true
   annotations:
     alb.ingress.kubernetes.io/target-type: 'ip'
-    alb.ingress.kubernetes.io/group.name: inner-bcl
-    alb.ingress.kubernetes.io/healthcheck-path: /health
+    alb.ingress.kubernetes.io/scheme: internal
+    alb.ingress.kubernetes.io/group.name: alb-qa-bcl-priv
+    # alb.ingress.kubernetes.io/healthcheck-path: /health
   rules:
     host: pochexagonal-bcl-ms-qa.itauchile2.cl
     path: "/"
